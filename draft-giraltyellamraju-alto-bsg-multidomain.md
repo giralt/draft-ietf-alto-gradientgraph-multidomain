@@ -4,16 +4,16 @@ category: info
 
 docname: draft-giraltyellamraju-alto-bsg-multidomain-latest
 ipr: trust200902
-area: Application
-workgroup: ALTO
+area: "Transport"
+workgroup: "Application-Layer Traffic Optimization"
 keyword: ALTO
 venue:
-  group: WG
-  type: Working Group
-  mail: alto@ietf.org
-  arch: https://mailarchive.ietf.org/arch/browse/alto/
-  github: giralt/draft-ietf-alto-gradient-graph
-  latest: https://giralt.github.io/draft-ietf-alto-gradient-graph/draft-giraltyellamraju-alto-bsg-requirements.html
+  group: "Application-Layer Traffic Optimization"
+  type: "Working Group"
+  mail: "alto@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/alto/"
+  github: "giralt/draft-ietf-alto-gradientgraph-multidomain"
+  latest: "https://giralt.github.io/draft-ietf-alto-gradientgraph-multidomain/draft-giraltyellamraju-alto-bsg-multidomain.html"
 
 stand_alone: yes
 smart_quotes: no
