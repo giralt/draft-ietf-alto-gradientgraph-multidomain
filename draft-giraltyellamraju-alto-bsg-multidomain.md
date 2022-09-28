@@ -22,7 +22,7 @@
 title: "Bottleneck Structure Graphs in Multidomain Networks: ALTO Use Cases and Requirements"
 category: info
 
-docname: draft-giraltyellamraju-alto-bsg-multidomain-latest 
+docname: draft-giraltyellamraju-alto-bsg-multidomain-latest
 ipr: trust200902
 area: Application
 workgroup: ALTO
