@@ -1,0 +1,281 @@
+
+
+
+
+Application-Layer Traffic Optimization                     J. Ros-Giralt
+Internet-Draft                                             S. Yellamraju
+Intended status: Informational                                  Qualcomm
+Expires: 1 April 2023                                              Q. Wu
+                                                                  Huawei
+                                                         L. M. Contreras
+                                                              Telefonica
+                                                                 R. Yang
+                                                         Yale University
+                                                                  K. Gao
+                                                      Sichuan University
+                                                       28 September 2022
+
+
+Bottleneck Structure Graphs in Multidomain Networks: ALTO Use Cases and
+                              Requirements
+           draft-giraltyellamraju-alto-bsg-multidomain-latest
+
+Abstract
+
+   TODO Abstract
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://giralt.github.io/draft-ietf-alto-gradientgraph-multidomain/
+   draft-giraltyellamraju-alto-bsg-multidomain.html.  Status information
+   for this document may be found at https://datatracker.ietf.org/doc/
+   draft-giraltyellamraju-alto-bsg-multidomain/.
+
+   Discussion of this document takes place on the Application-Layer
+   Traffic Optimization Working Group mailing list
+   (mailto:alto@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/alto/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/alto/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/giralt/draft-ietf-alto-gradientgraph-multidomain.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 1 April 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Security Considerations
+   4.  IANA Considerations
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   TODO Introduction
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Security Considerations
+
+   TODO Security
+
+4.  IANA Considerations
+
+   This document has no IANA actions.
+
+5.  References
+
+5.1.  Normative References
+
+   [I-D.ietf-alto-path-vector]
+              Gao, K., Lee, Y., Randriamasy, S., Yang, Y. R., and J.
+              Zhang, "An Extension for Application-Layer Traffic
+              Optimization (ALTO): Path Vector", Work in Progress,
+              Internet-Draft, draft-ietf-alto-path-vector-25, 20 March
+              2022, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              alto-path-vector-25>.
+
+   [I-D.ietf-alto-performance-metrics]
+              Wu, Q., Yang, Y. R., Lee, Y., Dhody, D., Randriamasy, S.,
+              and L. M. Contreras, "ALTO Performance Cost Metrics", Work
+              in Progress, Internet-Draft, draft-ietf-alto-performance-
+              metrics-28, 21 March 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-alto-
+              performance-metrics-28>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC7285]  Alimi, R., Ed., Penno, R., Ed., Yang, Y., Ed., Kiesel, S.,
+              Previdi, S., Roome, W., Shalunov, S., and R. Woundy,
+              "Application-Layer Traffic Optimization (ALTO) Protocol",
+              RFC 7285, DOI 10.17487/RFC7285, September 2014,
+              <https://www.rfc-editor.org/rfc/rfc7285>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8402]  Filsfils, C., Ed., Previdi, S., Ed., Ginsberg, L.,
+              Decraene, B., Litkowski, S., and R. Shakir, "Segment
+              Routing Architecture", RFC 8402, DOI 10.17487/RFC8402,
+              July 2018, <https://www.rfc-editor.org/rfc/rfc8402>.
+
+   [RFC8896]  Randriamasy, S., Yang, R., Wu, Q., Deng, L., and N.
+              Schwan, "Application-Layer Traffic Optimization (ALTO)
+              Cost Calendar", RFC 8896, DOI 10.17487/RFC8896, November
+              2020, <https://www.rfc-editor.org/rfc/rfc8896>.
+
+5.2.  Informative References
+
+   [B4-SIGCOMM]
+              Jain et al, S., "B4: Experience with a Globally-Deployed
+              Software Defined WAN", ACM SIGCOMM , 2013.
+
+   [BE-ONL]   "Bandwidth Estimation on OpenNetLab", IETF Plenary 112,
+              IETF ALTO WG , 2021,
+              <https://datatracker.ietf.org/meeting/112/materials/
+              slides-112-alto-bandwidth-estimation-service-00>.
+
+   [BE-SIGCOMM]
+              Kumar et al, A., "BwE: Flexible, Hierarchical Bandwidth
+              Allocation for WAN Distributed Computing", ACM SIGCOMM ,
+              2015.
+
+   [FLEXFLOW-STFORD]
+              Jia et al, Z., "Beyond Data And Model Parallelism For Deep
+              Neural Networks", n.d.,
+              <https://arxiv.org/pdf/1807.05358.pdf[>.
+
+   [FLOWDIR]  Pujol, E., Poese, I., Zerwas, J., Smaragdakis, G., and A.
+              Feldmann, "Steering Hyper-Giants' Traffic at Scale", ACM
+              CoNEXT , 2019.
+
+   [G2-SC]    Amsel, N., Ros-Giralt, J., Yellamraju, S., von Hoffe, B.,
+              and R. Lethin, "Computing Bottleneck Structures at Scale
+              for High-Precision Network Performance Analysis", IEEE
+              International Workshop on Innovating the Network for Data
+              Intensive Science (INDIS), Supercomputing , 2020.
+
+   [G2-SIGCOMM]
+              Ros-Giralt, J., Amsel, N., Yellamraju, S., Ezick, J.,
+              Lethin, R., Jiang, Y., Feng, A., Tassiulas, L., Wu, Z.,
+              and K. Bergman, "Designing data center networks using
+              bottleneck structures", ACM SIGCOMM , 2021.
+
+   [G2-SIGMETRICS]
+              Ros-Giralt, J., Bohara, A., Yellamraju, S., Langston, H.,
+              Lethin, R., Jiang, Y., Tassiulas, L., Li, J., Tan, Y., and
+              M. Veeraraghavan, "On the Bottleneck Structure of
+              Congestion-Controlled Networks", ACM SIGMETRICS , 2020.
+
+   [G2-TREP]  Ros-Giralt, J., Amsel, N., Yellamraju, S., Ezick, J.,
+              Lethin, R., Jiang, Y., Feng, A., Tassiulas, L., Wu, Z.,
+              and K. Bergman, "A Quantitative Theory of Bottleneck
+              Structures for Data Networks", Reservoir Labs (Qualcomm)
+              Technical Report , 2021.
+
+   [GALLAGER] Gallager, R. and D. Bertsekas, "Data Networks", 1992.
+
+   [JSP-INFOCOM]
+              Poularakis et al, D., "Joint Service Placement and Request
+              Routing in Multi-cell Mobile Edge Computing Networks",
+              n.d..
+
+   [LORENZ]   Lorenz, E., "Does the flap of a butterfly's wings in
+              Brazil set off a tornado in Texas?", American Association
+              for the Advancement of Science, 139th Meeting , 1972.
+
+   [MERCATOR] Xiang, Q., Zhang, J., Wang, X., Guok, C., Le, F.,
+              MacAuley, J., Newman, H., and Y. Yang, "Toward Fine-
+              Grained, Privacy-Preserving, Efficient Multi-Domain
+              Network Resource Discovery", IEEE/ACM IEEE/ACM IEEE
+              Journal on Selected Areas of Communication 37(8):
+              1924-1940, 2019,
+              <https://doi.org/10.1109/JSAC.2019.2927073>.
+
+   [MMSYS]    "Bandwidth Estimation for Real-Time Communications", 2021,
+              <https://2021.acmmmsys.org/rtc_challenge.php>.
+
+   [NOVA]     Gao, K., Xiang, Q., Wang, X., Yang, Y., and J. Bi, "An
+              objective-driven on-demand network abstraction for
+              adaptive applications", IEEE/ACM IEEE/ACM Transactions on
+              Networking (TON) Vol 27, no. 2 (2019): 805-818., 2019,
+              <https://doi.org/10.1109/IWQoS.2017.7969117>.
+
+   [PETERSON] Peterson, L. and O. Sunay, "5G Mobile Networks: A Systems
+              Approach", Open Networking Foundation , 2020.
+
+   [SH-SIGCOMM]
+              Singh et al, R., "Cost-effective capacity provisioning in
+              wide area networks with Shoofly", ACM SIGCOMM , 2021.
+
+   [SINGULARITY-MSFT]
+              Shukla et al, D., "Singularity: Planet-Scale, Preemptive
+              and Elastic Scheduling of AI Workloads", n.d.,
+              <https://arxiv.org/pdf/2202.07848.pdf>.
+
+   [TOPOOPT-MIT]
+              Wang et al, W., "TOPOOPT: Optimizing the Network Topology
+              for Distributed DNN Training", n.d.,
+              <https://arxiv.org/pdf/2202.00433.pdf>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Jordi Ros-Giralt
+   Qualcomm
+   Email: jros@qti.qualcomm.com
+
+
+   Sruthi Yellamraju
+   Qualcomm
+   Email: yellamra@qti.qualcomm.com
+
+
+   Qin Wu
+   Huawei
+   Email: bill.wu@huawei.com
+
+
+   Luis Miguel Contreras
+   Telefonica
+   Email: luismiguel.contrerasmurillo@telefonica.com
+
+
+   Richard Yang
+   Yale University
+   Email: yry@cs.yale.edu
+
+
+   Kai Gao
+   Sichuan University
+   Email: kaigao@scu.edu.cn
