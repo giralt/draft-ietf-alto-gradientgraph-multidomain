@@ -1,4 +1,4 @@
 # License
 
 See the
-[guidelines for contributions](https://github.com/giralt/draft-ietf-alto-gradient-graph-2/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/giralt/draft-ietf-alto-gradientgraph-multidomain/blob/main/CONTRIBUTING.md).
