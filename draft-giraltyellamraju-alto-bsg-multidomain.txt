@@ -106,7 +106,6 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
@@ -727,15 +726,15 @@ Table of Contents
    integrate the proposed distributed protocol into the ALTO standard.
    Throughout this discussion, we assume without loss of generality that
    each AS is managed by an ALTO server, and that each server only has
-   visibility of the topology, links and flow state.  We also assume
-   that the TIMER and the PATH_METRIC_EXCHANGE events are executed by
-   each ALTO server.  An alternative architecture could consider
-   executing these events in a separated engine, and have the ALTO
-   server query this engine to obtain the final bottleneck structures,
-   decoupling the distributed protocol from the ALTO standard.  While
-   this approach might be desirable in some cases, we currently omit it
-   from this discussion since it is relatively simpler from an
-   integration requirements standpoint.
+   visibility of the topology, links and flow state of the AS it is
+   managing.  We also assume that the TIMER and the PATH_METRIC_EXCHANGE
+   events are executed by each ALTO server.  An alternative architecture
+   could consider executing these events in a separated engine, and have
+   the ALTO server query this engine to obtain the final bottleneck
+   structures, decoupling the distributed protocol from the ALTO
+   standard.  While this approach might be desirable in some cases, we
+   currently omit it from this discussion since it is relatively simpler
+   from an integration requirements standpoint.
 
    To implement the proposed distributed protocol using ALTO, two broad
    requirements are necessary:
@@ -930,10 +929,6 @@ Table of Contents
               adaptive applications", IEEE/ACM IEEE/ACM Transactions on
               Networking (TON) Vol 27, no. 2 (2019): 805-818., 2019,
               <https://doi.org/10.1109/IWQoS.2017.7969117>.
-
-Acknowledgments
-
-   TODO acknowledge.
 
 Authors' Addresses
 
