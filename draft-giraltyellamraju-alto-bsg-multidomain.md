@@ -764,7 +764,8 @@ to integrate the proposed distributed protocol into the ALTO
 standard. Throughout this discussion, we assume without loss
 of generality that each AS is managed by an ALTO server,
 and that each server only has visibility of the topology,
-links and flow state. We also assume that the TIMER and the
+links and flow state of the AS it is managing.
+We also assume that the TIMER and the
 PATH_METRIC_EXCHANGE events are executed by each ALTO server.
 An alternative architecture could consider executing these
 events in a separated engine, and have the ALTO server
@@ -908,7 +909,9 @@ ALTO Entity Property Type Registry.
 
 --- back
 
+<!--
 # Acknowledgments
 {:numbered="false"}
 
 TODO acknowledge.
+-->
