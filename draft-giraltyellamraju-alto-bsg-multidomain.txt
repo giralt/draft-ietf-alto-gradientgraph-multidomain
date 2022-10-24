@@ -5,7 +5,7 @@
 Application-Layer Traffic Optimization                     J. Ros-Giralt
 Internet-Draft                                     Qualcomm Europe, Inc.
 Intended status: Informational                             S. Yellamraju
-Expires: 22 April 2023                       Qualcomm Technologies, Inc.
+Expires: 27 April 2023                       Qualcomm Technologies, Inc.
                                                                    Q. Wu
                                                                   Huawei
                                                          L. M. Contreras
@@ -14,7 +14,7 @@ Expires: 22 April 2023                       Qualcomm Technologies, Inc.
                                                          Yale University
                                                                   K. Gao
                                                       Sichuan University
-                                                         19 October 2022
+                                                         24 October 2022
 
 
  Bottleneck Structure Graphs in Multidomain Networks: Introduction and
@@ -71,7 +71,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2023.
+   This Internet-Draft will expire on 27 April 2023.
 
 Copyright Notice
 
@@ -92,13 +92,15 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Distributed Protocol to Compute the Bottleneck Structure of an
-           AS Under Partial Information
+           AS
      3.1.  Motivation
      3.2.  Base Protocol Definitions
      3.3.  Description of The Distributed Protocol
      3.4.  Example: Global Convergence to the Correct Bottleneck
            Substructures
    4.  Requirements
+     4.1.  Requirement 1: Computation of Bottleneck Substructures
+     4.2.  Requirement 2: Communication Between Neighboring ASs
    5.  Security Considerations
    6.  IANA Considerations
    7.  References
@@ -132,13 +134,13 @@ Table of Contents
    structure to help optimize application performance.  When the ALTO
    server has full visibility of the network (i.e., all of its links,
    routes, and flows), the bottleneck structure can be computed using
-   the algorithm introduced in [G2-SIGMETRICS].  In many scenarios,
-   however, flows traverse multiple autonomous systems (ASs), and thus
-   an ALTO server deployed in one AS may not have access to topological
-   and flow information from the other domains.  In this document, we
-   describe a border protocol that allows ALTO servers in each AS to
-   share their local path metrics dictionary (obtained via their local
-   computation of the bottleneck structure graph) with their
+   the algorithm introduced in [G2-SIGCOMM] [G2-SIGMETRICS].  In many
+   scenarios, however, flows traverse multiple autonomous systems (ASs),
+   and thus an ALTO server deployed in one AS may not have access to
+   topological and flow information from the other domains.  In this
+   document, we describe a border protocol that allows ALTO servers in
+   each AS to share their local path metrics dictionary (obtained via
+   their local computation of the bottleneck structure graph) with their
    neighbouring ASs.  Using the algorithm introduced in this document,
    this information alone is enough to ensure independent convergence by
    each AS to the correct bottleneck structure.  This cooperative
@@ -160,7 +162,6 @@ Table of Contents
    capitals, as shown here.
 
 3.  Distributed Protocol to Compute the Bottleneck Structure of an AS
-    Under Partial Information
 
 3.1.  Motivation
 
@@ -169,8 +170,8 @@ Table of Contents
    different operator that is responsible for (1) maintaining its own
    (and only its own) domain and (2) ensuring interoperability with the
    other domains.  The quintessential example of multi-domain networks
-   is the Internet itself, designed as a "network of interconnected
-   networks", commonly known as _autonomous systems_ (ASs).
+   is the Internet, designed as a "network of interconnected networks",
+   commonly known as _autonomous systems_ (ASs).
 
    In multi-domain networking environments, the operator in each domain
    only has visibility of its own network.  In particular, the operator
@@ -179,10 +180,10 @@ Table of Contents
    active in their network, but usually has no knowledge about the
    structure and state of any other network in the multi-domain
    environment.  For instance, a data flow may need to cross two network
-   domains, one operated by AT&T and another one operated by Verizon.
-   AT&T has no visibility into the network operated by Verizon, while
-   Verizon has no visibility into the network operated by AT&T's.  Yet
-   both networks need to cooperate in order to ensure the end-to-end QoS
+   domains, one operated by Operator O1 and another one operated by
+   Operator O2.  O1 has no visibility into the network operated by O2,
+   while O2 has no visibility into the network operated by O1.  Yet both
+   networks need to cooperate in order to ensure the end-to-end QoS
    required by the flow.
 
    Bottleneck structures ([G2-SIGCOMM], [G2-SIGMETRICS]) are
@@ -196,19 +197,19 @@ Table of Contents
    of links traversed by each flow and the capacity of the links is
    required.  In a multi-domain networking environment, however, such
    information is only known partially.  For instance, in the example
-   above, AT&T can know the set of links traversed by a flow that reside
-   in its own network, but it cannot know the set of links traversed by
-   a flow that reside in the Verizon network.  Moreover, in many cases,
-   such information is considered confidential for security, privacy and
-   competitiveness reasons.
+   above, operator O1 can know the set of links traversed by a flow that
+   reside in its own network, but may not know the set of links
+   traversed by a flow that reside in the operator O2 network.
+   Moreover, in many cases, such information is considered confidential
+   for security, privacy and competitiveness reasons.
 
    In this document, we introduce a distributed protocol that addresses
    the above problem, enabling the computation of bottleneck structures
    under the scenario of partial information.  In particular, an
    algorithm to compute the bottleneck structure of a network domain--
-   which we refer as the bottleneck substructure--is introduced that
-   only requires a simple, scalable, and secure cooperative exchange of
-   a path metric between neighboring autonomous systems to ensure global
+   referred as the _bottleneck substructure_--is introduced that only
+   requires a simple, scalable, and secure cooperative exchange of a
+   path metric between neighboring autonomous systems to ensure global
    convergence to the correct state.  Because network operators do have
    the ability to cooperate (provided that the exchange is simple,
    secure and guarantees privacy), the algorithm provides a practical
@@ -258,11 +259,12 @@ Table of Contents
    collapsing all the vertices of the flows that follow the same path
    into a single vertex called the _path vertex_. This technique leads
    to a more compact representation of the bottleneck structure graph
-   (thus significantly reducing computational complexity and memory
+   (thus, significantly reducing computational complexity and memory
    storage) without affecting its accuracy.
 
-   The following table introduces additional definitions that are used
-   in the description of the distributed protocol in the next section:
+   The following table introduces additional conventions and definitions
+   that are used in the description of the distributed protocol in the
+   next section:
 
    +=============+=====================================================+
    |     Notation|Description                                          |
@@ -272,12 +274,12 @@ Table of Contents
    |          A_i|An AS in A, for i = 1, ..., |A|.                     |
    +-------------+-----------------------------------------------------+
    |     P(A_i) =|The set of active paths found in A_i.  These are     |
-   |   {p_1, ...,|paths for which there exist traffic flowing through  |
-   |p_{|P(A_i)|}}|them.                                                |
+   |   {p_1, ...,|paths for which there exist 0traffic flowing through |
+   |  p_|P(A_i)|}|them.                                                |
    +-------------+-----------------------------------------------------+
    |     L(A_i) =|The set of active links found in A_i.  These are     |
    |   {l_1, ...,|links for which there exists traffic flowing through |
-   |l_{|L(A_i)|}}|them.                                                |
+   |  l_|L(A_i)|}|them.                                                |
    +-------------+-----------------------------------------------------+
    |            B|The global bottleneck structure graph.  The form of  |
    |             |bottleneck structure used by the distributed         |
@@ -290,12 +292,13 @@ Table of Contents
    |             |globally correct available bandwidth for path p.     |
    +-------------+-----------------------------------------------------+
    |       B(A_i)|The bottleneck substructure of A_i, corresponding to |
-   |             |the subgraph of B that includes (1) the paths in     |
-   |             |P(A_i), (2) the links in L(A_i) and (3) all the edges|
-   |             |in B that connect them.  If a path p in P is         |
-   |             |bottlenecked at a link not in L, then B(F, L)        |
-   |             |includes a virtual link v with capacity equal to     |
-   |             |B.BW(p) and a directed edge from v to p.             |
+   |             |the subgraph of B that includes (1) the vertices     |
+   |             |corresponding to the paths in P(A_i), (2) the        |
+   |             |vertices corresponding to the links in L(A_i) and (3)|
+   |             |all the edges in B that connect them.  If a path p in|
+   |             |P(A_i) is bottlenecked at a link not in L(A_i), then |
+   |             |B(P, L) includes a virtual link v with capacity equal|
+   |             |to B.BW(p) and a directed edge from v to p.          |
    +-------------+-----------------------------------------------------+
    | B(A_i).BW(p)|The bandwidth available to path p according to the   |
    |             |bottleneck substructure of A_i.  This value is equal |
@@ -304,29 +307,29 @@ Table of Contents
    |      PL(A_i)|A dictionary mapping every path in P(A_i) with the   |
    |             |subset of links in L(A_i) that it traverses.  Note   |
    |             |that a path p can traverse one or more links not in  |
-   |             |L.  This reflects the notion of partial information  |
-   |             |inherent to multi-domain networking environments.    |
-   |             |That is, A_i may not know all the links traversed by |
-   |             |its active paths; in particular, it only knows the   |
-   |             |subset of links that are in A_i.                     |
+   |             |L(A_i).  This reflects the notion of partial         |
+   |             |information inherent to multi-domain networking      |
+   |             |environments.  That is, A_i may not know all the     |
+   |             |links traversed by its active paths; in particular,  |
+   |             |it only knows the subset of links that are in A_i.   |
    +-------------+-----------------------------------------------------+
    |       C(A_i)|A dictionary mapping each link in A_i with its       |
    |             |capacity (in bps).                                   |
    +-------------+-----------------------------------------------------+
    |       N(A_i)|The set of ASs that are neighbors of A_i.            |
    +-------------+-----------------------------------------------------+
-   |   PM(A_i)(p)|The current bandwidth share of path p as computed by |
-   |             |A_i.  This is also known as the path metric of p     |
+   |   PM(A_i)(p)|The current bandwidth available to path p as computed|
+   |             |by A_i.  This is also known as the path metric of p  |
    |             |according to A_i.                                    |
    +-------------+-----------------------------------------------------+
 
-      Table 1: Conventions used in the description of the distributed
-                                 protocol.
+    Table 1: Conventions and definitions used in the description of the
+                           distributed protocol.
 
 3.3.  Description of The Distributed Protocol
 
    The algorithm run by each autonomous system AS_i, 1 <= i <= |A|,
-   consists of two independently run events as follows:
+   consists of two independently executed events as follows:
 
    *Event: TIMER*
 
@@ -356,46 +359,60 @@ Table of Contents
 
    The procedure COMPUTE_BOTTLENECK_SUBSTRUCTURE is called from the
    TIMER event, and it is responsible for computing the bottleneck
-   substructure.  It can be proven that this procedure is able to obtain
-   the correct bottleneck substructure within a finite number of
+   substructure.  It can be proven that this procedure converges to the
+   correct bottleneck substructure within a finite number of
    PATH_METRIC_ANNOUNCEMENT messages:
 
    *Procedure: COMPUTE_BOTTLENECK_SUBSTRUCTURE(L, PL, C, PM):*
 
-    1. Set i = 0;
+    1. i = 0; L_0 = L; PL_0 = PL;
 
-    2. L_0 = L;
+    2. While True:
 
-    3. PL_0 = PL;
+            2.1. B_i = COMPUTE_BOTTLENECK_STRUCTURE(L_i, PL_i, C);
 
-    4. While True:
+            2.2. If B_i.BW(p) == PM(p) for all path p in PL_i:
 
-            4.1. B_i = COMPUTE_BOTTLENECK_STRUCTURE(L_i, PL_i, C);
+                    2.2.1. Break;
 
-            4.2. If B_i.BW(p) = PM(p) for all path p in PL_i:
+            2.3. For all path p in PL_i such that B_i.BW(p) > PM(p):
 
-                    4.2.1. Break;
+                    2.3.1. If PL_i[p] has no virtual link:
 
-            4.3. For all path p in PL_i such that B_i.BW(p) > PM(p):
+                            2.3.1.1. Add a new virtual link v to the set of links PL_i[p];
 
-                    4.3.1. If PL_i[p] has no virtual link:
+                            2.3.1.2. Add virtual link v to the set L_i;
 
-                            4.3.1.1. Add a new virtual link v to the set of links PL_i[p];
+                    2.3.2.  Set C(v) = PM(p);
 
-                            4.3.1.2. Add virtual link v to the set L_i;
+            2.2. i = i + 1;
 
-                    4.3.2.  Set C(v) = PM(p);
+            2.5. L_i = L_{i-1};
 
-            4.4. i = i + 1;
+            2.6. PL_i = PL_{i-1};
 
-            4.5. L_i = L_{i-1};
-
-            4.6. PL_i = PL_{i-1};
-
-    5. Return B_i;
+    3. Return B_i;
 
    In the above procedure, the function COMPUTE_BOTTLENECK_STRUCTURE
    corresponds to the GradientGraph algorithm introduced in [G2-TREP].
+
+   The termination condition of this procedure is found in line 2.2.1:
+
+       B_i.BW(p) == PM(p) for all path p in PL_i
+
+   When the distributed algorithm converges to a final solution, the
+   invocation of the procedure COMPUTE_BOTTLENECK_SUBSTRUCTURE returns
+   immediately at this condition, and the path metric dictionaries for
+   all the autonomous systems (PM(A_i) for 1 <= i <= |A|) no longer
+   change, provided that the network state does not change.  Further,
+   upon termination, the distributed algorithm ensures that all the path
+   metric values for all the autonomous systems are in agreement:
+
+    PM(A_i)(p) == PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
+
+   We call this the _convergence condition_, to denote the fact that
+   upon termination, all the path metrics from all the ASs are in
+   agreement.
 
 3.4.  Example: Global Convergence to the Correct Bottleneck
       Substructures
@@ -493,7 +510,7 @@ Table of Contents
       |      |  |      |               |      |
       |  p1  <-->  l1  <--------------->  p6  |
       |      |  |      |  +------------+      |
-      +------+  +--^---+  |            +---+--+
+      +------+  +--^---+  |            +------+
                    |      |
                    |      |
                 +--v---+  |
@@ -505,7 +522,7 @@ Table of Contents
                    |      |
                 +--v---+  |  +------+
                 |      <--+  |      |
-                |  l2  <---->|  p4  +
+                |  l2  <---->|  p4  |
                 |      |     |      |
                 +--^---+     +------+
                    |
@@ -521,7 +538,7 @@ Table of Contents
                  |      |               |      |
                  |  v1  <--------------->  p6  |
                  |      |               |      |
-                 +------+               +---+--+
+                 +------+               +--+---+
                                            |
                                            |
                  +------+    +------+   +--v---+  +------+
@@ -561,9 +578,10 @@ Table of Contents
    presented.
 
       Iteration 1:
+      ------------
 
-      +====================+
-      | PM(AS1)            |
+      State of the path metric dictionary PM(AS1):
+
       +====================+
       | PM(AS1)(p1) = 8.3  |
       +--------------------+
@@ -574,7 +592,9 @@ Table of Contents
       | PM(AS1)(p4) = 16.6 |
       +--------------------+
       | PM(AS1)(p6) = 8.3  |
-      +--------------------+
+      +====================+
+
+      State of the bottleneck substructure B(AS1):
 
       +------+  +------+               +------+
       |      |  |      |               |      |
@@ -605,16 +625,19 @@ Table of Contents
           Figure 5: Execution of the distributed protocol by AS1.
 
       Iteration 1:
+      ------------
 
-      +====================+
-      | PM(AS2)            |
+      State of the path metric dictionary PM(AS2):
+
       +====================+
       | PM(AS2)(p4) = 33.3 |
       +--------------------+
       | PM(AS2)(p5) = 33.3 |
       +--------------------+
       | PM(AS2)(p6) = 33.3 |
-      +--------------------+
+      +====================+
+
+      State of the bottleneck substructure B(AS2):
 
       +------+  +------+   +------+
       |      |  |      |   |      |
@@ -637,16 +660,19 @@ Table of Contents
                 +------+
 
       Iteration 2:
+      ------------
 
-      +====================+
-      | PM(AS2)            |
+      State of the path metric dictionary PM(AS2):
+
       +====================+
       | PM(AS2)(p4) = 16.6 |
       +--------------------+
       | PM(AS2)(p5) = 75   |
       +--------------------+
       | PM(AS2)(p6) = 8.3  |
-      +--------------------+
+      +====================+
+
+      State of the bottleneck substructure B(AS2):
 
       +------+              +------+
       |      |              |      |
@@ -669,9 +695,92 @@ Table of Contents
 
           Figure 6: Execution of the distributed protocol by AS2.
 
+   Note that at the end of the execution of the distributed algorithm,
+   the convergence condition
+
+    PM(A_i)(p) = PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
+
+   is satisfied, as shown in Table 2.
+
+                      +====+===========+===========+
+                      |  p | PM(A1)(p) | PM(A2)(p) |
+                      +====+===========+===========+
+                      | p1 | 8.3       | --        |
+                      +----+-----------+-----------+
+                      | p2 | 16.6      | --        |
+                      +----+-----------+-----------+
+                      | p3 | 8.3       | --        |
+                      +----+-----------+-----------+
+                      | p4 | 16.6      | 16.6      |
+                      +----+-----------+-----------+
+                      | p5 | --        | 75        |
+                      +----+-----------+-----------+
+                      | p6 | 8.3       | 8.3       |
+                      +----+-----------+-----------+
+
+                         Table 2: Verification of
+                        the convergence condition.
+
 4.  Requirements
 
-   XXX
+   This section provides a discussion on the necessary requirements to
+   integrate the proposed distributed protocol into the ALTO standard.
+   Throughout this discussion, we assume without loss of generality that
+   each AS is managed by an ALTO server, and that each server only has
+   visibility of the topology, links and flow state.  We also assume
+   that the TIMER and the PATH_METRIC_EXCHANGE events are executed by
+   each ALTO server.  An alternative architecture could consider
+   executing these events in a separated engine, and have the ALTO
+   server query this engine to obtain the final bottleneck structures,
+   decoupling the distributed protocol from the ALTO standard.  While
+   this approach might be desirable in some cases, we currently omit it
+   from this discussion since it is relatively simpler from an
+   integration requirements standpoint.
+
+   To implement the proposed distributed protocol using ALTO, two broad
+   requirements are necessary:
+
+   *  Requirement 1: The capability for each ALTO server to compute
+      bottleneck substructures of its own AS.
+
+   *  Requirement 2: The capability for each ALTO server to communicate
+      with its neighboring ASs.
+
+4.1.  Requirement 1: Computation of Bottleneck Substructures
+
+   The requirements for an ALTO server to compute the bottleneck
+   substructure of its associated AS are the same as the requirements to
+   compute the bottleneck structure in the case the network consists of
+   a single autonomous system.  These requirements are discussed in the
+   Requirements Section of
+   [I-D.draft-giraltyellamraju-alto-bsg-requirements].  Refer to this
+   document for further details.
+
+4.2.  Requirement 2: Communication Between Neighboring ASs
+
+   The TIMER event executed by each ALTO server needs to periodically
+   transmit a PATH_METRIC_ANNOUNCEMENT message to its neighboring ASs.
+   This leads to the following requirement:
+
+   *  Requirement 2.1: ALTO servers managing neighboring ASs need to be
+      reachable to each other.
+
+   *  Requirement 2.2: The sharing of algorithmic state between ALTO
+      servers requires extending the base ALTO protocol to support
+      server-to-server communication semantics.
+
+   This requirement constitutes a new capability, since the current ALTO
+   standard only supports client-to-server communication semantics
+   [RFC7285].
+
+   We note that [I-D.draft-zhang-alto-oam-yang] discusses mechanisms for
+   cross-ALTO server communication with the objective to facilitate
+   Operations and Management (OAM) of multi-server deployments.  The
+   distributed protocol proposed in this document could be used as a use
+   case to help drive the specifications of the inter-server
+   communication protocol discussed in [I-D.draft-zhang-alto-oam-yang]
+   or in any future ALTO RFCs that may focus on sharing of algorithmic
+   state.
 
 5.  Security Considerations
 
@@ -697,7 +806,7 @@ Table of Contents
    extension is mainly applicable in scenarios where:
 
    *  The properties of the Bottleneck Structure Graph do not impose
-      security risks to the ALTO service provider, e.g., by not carrying
+      security risks to the ALTO service provider; e.g., by not carrying
       sensitive information.
 
    *  The ALTO server and client have established a reliable trust
@@ -734,14 +843,13 @@ Table of Contents
    computation and storage on the server side.  For example, if an ALTO
    server implementation dynamically computes the Bottleneck Structure
    for each request, the BSG service may become an entry point for
-   denial-of-service attacks on the availability of an ALTO server.
-
-   To mitigate this risk, an ALTO server may consider using
-   optimizations such as precomputation-and-projection mechanisms
-   [MERCATOR] to reduce the overhead for processing each query.  An ALTO
-   server may also protect itself from malicious clients by monitoring
-   the behaviors of clients and stopping serving clients with suspicious
-   behaviors (e.g., sending requests at a high frequency).
+   denial-of-service attacks on the availability of an ALTO server.  To
+   mitigate this risk, an ALTO server may consider using optimizations
+   such as precomputation-and-projection mechanisms [MERCATOR] to reduce
+   the overhead for processing each query.  An ALTO server may also
+   protect itself from malicious clients by monitoring the behaviors of
+   clients and stopping serving clients with suspicious behaviors (e.g.,
+   sending requests at a high frequency).
 
 6.  IANA Considerations
 
@@ -762,21 +870,12 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-
               giraltyellamraju-alto-bsg-requirements-03>.
 
-   [I-D.ietf-alto-path-vector]
-              Gao, K., Lee, Y., Randriamasy, S., Yang, Y. R., and J.
-              Zhang, "An Extension for Application-Layer Traffic
-              Optimization (ALTO): Path Vector", Work in Progress,
-              Internet-Draft, draft-ietf-alto-path-vector-25, 20 March
-              2022, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              alto-path-vector-25>.
-
-   [I-D.ietf-alto-performance-metrics]
-              Wu, Q., Yang, Y. R., Lee, Y., Dhody, D., Randriamasy, S.,
-              and L. M. Contreras, "ALTO Performance Cost Metrics", Work
-              in Progress, Internet-Draft, draft-ietf-alto-performance-
-              metrics-28, 21 March 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-alto-
-              performance-metrics-28>.
+   [I-D.draft-zhang-alto-oam-yang]
+              Zhang, J., Dhody, D., Gao, K., and R. Schott, "A Yang Data
+              Model for OAM and Management of ALTO Protocol", Work in
+              Progress, Internet-Draft, draft-zhang-alto-oam-yang-02, 7
+              March 2022, <https://datatracker.ietf.org/doc/html/draft-
+              zhang-alto-oam-yang-02>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -798,46 +897,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8402]  Filsfils, C., Ed., Previdi, S., Ed., Ginsberg, L.,
-              Decraene, B., Litkowski, S., and R. Shakir, "Segment
-              Routing Architecture", RFC 8402, DOI 10.17487/RFC8402,
-              July 2018, <https://www.rfc-editor.org/rfc/rfc8402>.
-
-   [RFC8896]  Randriamasy, S., Yang, R., Wu, Q., Deng, L., and N.
-              Schwan, "Application-Layer Traffic Optimization (ALTO)
-              Cost Calendar", RFC 8896, DOI 10.17487/RFC8896, November
-              2020, <https://www.rfc-editor.org/rfc/rfc8896>.
-
 7.2.  Informative References
-
-   [B4-SIGCOMM]
-              Jain et al, S., "B4: Experience with a Globally-Deployed
-              Software Defined WAN", ACM SIGCOMM , 2013.
-
-   [BE-ONL]   "Bandwidth Estimation on OpenNetLab", IETF Plenary 112,
-              IETF ALTO WG , 2021,
-              <https://datatracker.ietf.org/meeting/112/materials/
-              slides-112-alto-bandwidth-estimation-service-00>.
-
-   [BE-SIGCOMM]
-              Kumar et al, A., "BwE: Flexible, Hierarchical Bandwidth
-              Allocation for WAN Distributed Computing", ACM SIGCOMM ,
-              2015.
-
-   [FLEXFLOW-STFORD]
-              Jia et al, Z., "Beyond Data And Model Parallelism For Deep
-              Neural Networks", n.d.,
-              <https://arxiv.org/pdf/1807.05358.pdf[>.
-
-   [FLOWDIR]  Pujol, E., Poese, I., Zerwas, J., Smaragdakis, G., and A.
-              Feldmann, "Steering Hyper-Giants' Traffic at Scale", ACM
-              CoNEXT , 2019.
-
-   [G2-SC]    Amsel, N., Ros-Giralt, J., Yellamraju, S., von Hoffe, B.,
-              and R. Lethin, "Computing Bottleneck Structures at Scale
-              for High-Precision Network Performance Analysis", IEEE
-              International Workshop on Innovating the Network for Data
-              Intensive Science (INDIS), Supercomputing , 2020.
 
    [G2-SIGCOMM]
               Ros-Giralt, J., Amsel, N., Yellamraju, S., Ezick, J.,
@@ -857,17 +917,6 @@ Table of Contents
               Structures for Data Networks", Qualcomm Technologies Inc.,
               Technical Report , 2021.
 
-   [GALLAGER] Gallager, R. and D. Bertsekas, "Data Networks", 1992.
-
-   [JSP-INFOCOM]
-              Poularakis et al, D., "Joint Service Placement and Request
-              Routing in Multi-cell Mobile Edge Computing Networks",
-              n.d..
-
-   [LORENZ]   Lorenz, E., "Does the flap of a butterfly's wings in
-              Brazil set off a tornado in Texas?", American Association
-              for the Advancement of Science, 139th Meeting , 1972.
-
    [MERCATOR] Xiang, Q., Zhang, J., Wang, X., Guok, C., Le, F.,
               MacAuley, J., Newman, H., and Y. Yang, "Toward Fine-
               Grained, Privacy-Preserving, Efficient Multi-Domain
@@ -876,31 +925,11 @@ Table of Contents
               1924-1940, 2019,
               <https://doi.org/10.1109/JSAC.2019.2927073>.
 
-   [MMSYS]    "Bandwidth Estimation for Real-Time Communications", 2021,
-              <https://2021.acmmmsys.org/rtc_challenge.php>.
-
    [NOVA]     Gao, K., Xiang, Q., Wang, X., Yang, Y., and J. Bi, "An
               objective-driven on-demand network abstraction for
               adaptive applications", IEEE/ACM IEEE/ACM Transactions on
               Networking (TON) Vol 27, no. 2 (2019): 805-818., 2019,
               <https://doi.org/10.1109/IWQoS.2017.7969117>.
-
-   [PETERSON] Peterson, L. and O. Sunay, "5G Mobile Networks: A Systems
-              Approach", Open Networking Foundation , 2020.
-
-   [SH-SIGCOMM]
-              Singh et al, R., "Cost-effective capacity provisioning in
-              wide area networks with Shoofly", ACM SIGCOMM , 2021.
-
-   [SINGULARITY-MSFT]
-              Shukla et al, D., "Singularity: Planet-Scale, Preemptive
-              and Elastic Scheduling of AI Workloads", n.d.,
-              <https://arxiv.org/pdf/2202.07848.pdf>.
-
-   [TOPOOPT-MIT]
-              Wang et al, W., "TOPOOPT: Optimizing the Network Topology
-              for Distributed DNN Training", n.d.,
-              <https://arxiv.org/pdf/2202.00433.pdf>.
 
 Acknowledgments
 

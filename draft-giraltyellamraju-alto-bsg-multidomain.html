@@ -390,7 +390,7 @@ dl {
 dl > dt {
   float: left;
   margin-right: 1em;
-  min-width: 20ch;
+  min-width: 12ch;
 }
 dl.dlNewline > dt {
   float: none;
@@ -1057,7 +1057,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ros-Giralt, et al.</td>
-<td class="center">Expires 22 April 2023</td>
+<td class="center">Expires 27 April 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-giraltyellamraju-alto-bsg-multidomain-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-10-19" class="published">19 October 2022</time>
+<time datetime="2022-10-24" class="published">24 October 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-04-22">22 April 2023</time></dd>
+<dd class="expires"><time datetime="2023-04-27">27 April 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1158,7 +1158,7 @@ ALTO standard.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 April 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 April 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1194,7 +1194,7 @@ ALTO standard.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-distributed-protocol-to-com" class="internal xref">Distributed Protocol to Compute the Bottleneck Structure of an AS Under Partial Information</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-distributed-protocol-to-com" class="internal xref">Distributed Protocol to Compute the Bottleneck Structure of an AS</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
@@ -1212,6 +1212,14 @@ ALTO standard.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-requirements" class="internal xref">Requirements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-requirement-1-computation-o" class="internal xref">Requirement 1: Computation of Bottleneck Substructures</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-requirement-2-communication" class="internal xref">Requirement 2: Communication Between Neighboring ASs</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1267,7 +1275,7 @@ Cost Map) exposing the properties of the bottleneck structure
 to help optimize application performance. When the ALTO server has full
 visibility of the network (i.e., all of its links, routes, and flows),
 the bottleneck structure can be computed using the algorithm introduced
-in <span>[<a href="#G2-SIGMETRICS" class="cite xref">G2-SIGMETRICS</a>]</span>. In many scenarios, however, flows traverse multiple
+in <span>[<a href="#G2-SIGCOMM" class="cite xref">G2-SIGCOMM</a>]</span> <span>[<a href="#G2-SIGMETRICS" class="cite xref">G2-SIGMETRICS</a>]</span>. In many scenarios, however, flows traverse multiple
 autonomous systems (ASs), and thus an ALTO server deployed in one AS may not
 have access to topological and flow information from the other domains.
 In this document, we describe a border protocol that allows ALTO servers
@@ -1298,10 +1306,10 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="distributed-protocol-to-compute-the-bottleneck-structure-of-an-as-under-partial-information">
+<div id="distributed-protocol-to-compute-the-bottleneck-structure-of-an-as">
 <section id="section-3">
       <h2 id="name-distributed-protocol-to-com">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-distributed-protocol-to-com" class="section-name selfRef">Distributed Protocol to Compute the Bottleneck Structure of an AS Under Partial Information</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-distributed-protocol-to-com" class="section-name selfRef">Distributed Protocol to Compute the Bottleneck Structure of an AS</a>
       </h2>
 <div id="motivation">
 <section id="section-3.1">
@@ -1312,8 +1320,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 multiple network domains, each one administered by a different operator
 that is responsible for (1) maintaining its own (and only its own)
 domain and (2) ensuring interoperability with the other domains.
-The quintessential example of multi-domain networks is the Internet
-itself, designed as a "network of interconnected networks", commonly
+The quintessential example of multi-domain networks is the Internet,
+designed as a "network of interconnected networks", commonly
 known as <em>autonomous systems</em> (ASs).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">In multi-domain networking environments, the operator in each domain
 only has visibility of its own network. In particular, the operator
@@ -1322,9 +1330,9 @@ the classes of quality of service (QoS) to serve, and the flows
 currently active in their network, but usually has no knowledge
 about the structure and state of any other network in the
 multi-domain environment. For instance, a data flow may need to cross
-two network domains, one operated by AT&amp;T and another one operated by
-Verizon. AT&amp;T has no visibility into the network operated by Verizon,
-while Verizon has no visibility into the network operated by AT&amp;T's.
+two network domains, one operated by Operator O1 and another one
+operated by Operator O2. O1 has no visibility into the network operated by O2,
+while O2 has no visibility into the network operated by O1.
 Yet both networks need to cooperate in order to ensure the end-to-end
 QoS required by the flow.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">Bottleneck structures (<span>[<a href="#G2-SIGCOMM" class="cite xref">G2-SIGCOMM</a>]</span>, <span>[<a href="#G2-SIGMETRICS" class="cite xref">G2-SIGMETRICS</a>]</span>) are computational
@@ -1337,16 +1345,16 @@ network design. In order to compute the bottleneck structure of a network,
 information of the set of links traversed by each flow and the
 capacity of the links is required. In a multi-domain networking
 environment, however, such information is only known partially. For
-instance, in the example above, AT&amp;T can know the set of links
-traversed by a flow that reside in its own network, but it cannot
-know the set of links traversed by a flow that reside in the Verizon
+instance, in the example above, operator O1 can know the set of links
+traversed by a flow that reside in its own network, but may not
+know the set of links traversed by a flow that reside in the operator O2
 network. Moreover, in many cases, such information is considered confidential
 for security, privacy and competitiveness reasons.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">In this document, we introduce a distributed protocol that addresses the
 above problem, enabling the computation of bottleneck structures
 under the scenario of partial information. In particular,
 an algorithm to compute the bottleneck structure of a network
-domain--which we refer as the bottleneck substructure--is introduced that
+domain--referred as the <em>bottleneck substructure</em>--is introduced that
 only requires a simple, scalable, and secure cooperative exchange of a
 path metric between neighboring autonomous systems to ensure global
 convergence to the correct state. Because network
@@ -1396,16 +1404,17 @@ The PGG significantly reduces the size of the bottleneck
 structure graph by collapsing all the vertices of the flows that
 follow the same path into a single vertex called the <em>path vertex</em>.
 This technique leads to a more compact representation
-of the bottleneck structure graph (thus significantly reducing
+of the bottleneck structure graph (thus, significantly reducing
 computational complexity and memory storage) without affecting
 its accuracy.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.2-7">The following table introduces additional definitions that are used
+<p id="section-3.2-7">The following table introduces additional
+conventions and definitions that are used
 in the description of the distributed protocol in the next section:<a href="#section-3.2-7" class="pilcrow">¶</a></p>
-<span id="name-conventions-used-in-the-des"></span><div id="proto_defs">
+<span id="name-conventions-and-definitions-"></span><div id="proto_defs">
 <table class="center" id="table-1">
           <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-conventions-used-in-the-des" class="selfRef">Conventions used in the description of the distributed protocol.</a>
+<a href="#name-conventions-and-definitions-" class="selfRef">Conventions and definitions used in the description of the distributed protocol.</a>
           </caption>
 <thead>
             <tr>
@@ -1423,11 +1432,11 @@ in the description of the distributed protocol in the next section:<a href="#sec
               <td class="text-left" rowspan="1" colspan="1">An AS in A, for i = 1, ..., |A|.</td>
             </tr>
             <tr>
-              <td class="text-right" rowspan="1" colspan="1">P(A_i) = {p_1, ..., p_{|P(A_i)|}}</td>
-              <td class="text-left" rowspan="1" colspan="1">The set of active paths found in A_i. These are paths for which there exist traffic flowing through them.</td>
+              <td class="text-right" rowspan="1" colspan="1">P(A_i) = {p_1, ..., p_|P(A_i)|}</td>
+              <td class="text-left" rowspan="1" colspan="1">The set of active paths found in A_i. These are paths for which there exist 0traffic flowing through them.</td>
             </tr>
             <tr>
-              <td class="text-right" rowspan="1" colspan="1">L(A_i) = {l_1, ..., l_{|L(A_i)|}}</td>
+              <td class="text-right" rowspan="1" colspan="1">L(A_i) = {l_1, ..., l_|L(A_i)|}</td>
               <td class="text-left" rowspan="1" colspan="1">The set of active links found in A_i. These are links for which there exists traffic flowing through them.</td>
             </tr>
             <tr>
@@ -1440,7 +1449,7 @@ in the description of the distributed protocol in the next section:<a href="#sec
             </tr>
             <tr>
               <td class="text-right" rowspan="1" colspan="1">B(A_i)</td>
-              <td class="text-left" rowspan="1" colspan="1">The bottleneck substructure of A_i, corresponding to the subgraph of B that includes (1) the paths in P(A_i), (2) the links in L(A_i) and (3) all the edges in B that connect them. If a path p in P is bottlenecked at a link not in L, then B(F, L) includes a virtual link v with capacity equal to B.BW(p) and a directed edge from v to p.</td>
+              <td class="text-left" rowspan="1" colspan="1">The bottleneck substructure of A_i, corresponding to the subgraph of B that includes (1) the vertices corresponding to the paths in P(A_i), (2) the vertices corresponding to the links in L(A_i) and (3) all the edges in B that connect them. If a path p in P(A_i) is bottlenecked at a link not in L(A_i), then B(P, L) includes a virtual link v with capacity equal to B.BW(p) and a directed edge from v to p.</td>
             </tr>
             <tr>
               <td class="text-right" rowspan="1" colspan="1">B(A_i).BW(p)</td>
@@ -1448,7 +1457,7 @@ in the description of the distributed protocol in the next section:<a href="#sec
             </tr>
             <tr>
               <td class="text-right" rowspan="1" colspan="1">PL(A_i)</td>
-              <td class="text-left" rowspan="1" colspan="1">A dictionary mapping every path in P(A_i) with the subset of links in L(A_i) that it traverses. Note that a path p can traverse one or more links not in L.  This reflects the notion of partial information inherent to multi-domain networking environments. That is, A_i may not know all the links traversed by its active paths; in particular, it only knows the subset of links that are in A_i.</td>
+              <td class="text-left" rowspan="1" colspan="1">A dictionary mapping every path in P(A_i) with the subset of links in L(A_i) that it traverses. Note that a path p can traverse one or more links not in L(A_i).  This reflects the notion of partial information inherent to multi-domain networking environments. That is, A_i may not know all the links traversed by its active paths; in particular, it only knows the subset of links that are in A_i.</td>
             </tr>
             <tr>
               <td class="text-right" rowspan="1" colspan="1">C(A_i)</td>
@@ -1460,7 +1469,7 @@ in the description of the distributed protocol in the next section:<a href="#sec
             </tr>
             <tr>
               <td class="text-right" rowspan="1" colspan="1">PM(A_i)(p)</td>
-              <td class="text-left" rowspan="1" colspan="1">The current bandwidth share of path p as computed by A_i. This is also known as the path metric of p according to A_i.</td>
+              <td class="text-left" rowspan="1" colspan="1">The current bandwidth available to path p as computed by A_i. This is also known as the path metric of p according to A_i.</td>
             </tr>
           </tbody>
         </table>
@@ -1473,7 +1482,7 @@ in the description of the distributed protocol in the next section:<a href="#sec
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-description-of-the-distribu" class="section-name selfRef">Description of The Distributed Protocol</a>
         </h3>
 <p id="section-3.3-1">The algorithm run by each autonomous system AS_i, 1 &lt;= i &lt;= |A|,
-consists of two independently run events as follows:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+consists of two independently executed events as follows:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2"><strong>Event: TIMER</strong><a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.3-3">
 <pre>
@@ -1505,47 +1514,66 @@ Messages</em> to converge to a globally correct routing table
 by only exchanging local knowledge between neighbor ASs.)<a href="#section-3.3-6" class="pilcrow">¶</a></p>
 <p id="section-3.3-7">The procedure COMPUTE_BOTTLENECK_SUBSTRUCTURE is called from
 the TIMER event, and it is responsible for computing the bottleneck
-substructure. It can be proven that this procedure is able to
-obtain the correct bottleneck substructure within a finite number
+substructure. It can be proven that this procedure converges
+to the correct bottleneck substructure within a finite number
 of PATH_METRIC_ANNOUNCEMENT messages:<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 <p id="section-3.3-8"><strong>Procedure: COMPUTE_BOTTLENECK_SUBSTRUCTURE(L, PL, C, PM):</strong><a href="#section-3.3-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.3-9">
 <pre>
-    1. Set i = 0;
+    1. i = 0; L_0 = L; PL_0 = PL;
 
-    2. L_0 = L;
+    2. While True:
 
-    3. PL_0 = PL;
+            2.1. B_i = COMPUTE_BOTTLENECK_STRUCTURE(L_i, PL_i, C);
 
-    4. While True:
+            2.2. If B_i.BW(p) == PM(p) for all path p in PL_i:
 
-            4.1. B_i = COMPUTE_BOTTLENECK_STRUCTURE(L_i, PL_i, C);
+                    2.2.1. Break;
 
-            4.2. If B_i.BW(p) = PM(p) for all path p in PL_i:
+            2.3. For all path p in PL_i such that B_i.BW(p) &gt; PM(p):
 
-                    4.2.1. Break;
+                    2.3.1. If PL_i[p] has no virtual link:
 
-            4.3. For all path p in PL_i such that B_i.BW(p) &gt; PM(p):
+                            2.3.1.1. Add a new virtual link v to the set of links PL_i[p];
 
-                    4.3.1. If PL_i[p] has no virtual link:
+                            2.3.1.2. Add virtual link v to the set L_i;
 
-                            4.3.1.1. Add a new virtual link v to the set of links PL_i[p];
+                    2.3.2.  Set C(v) = PM(p);
 
-                            4.3.1.2. Add virtual link v to the set L_i;
+            2.2. i = i + 1;
 
-                    4.3.2.  Set C(v) = PM(p);
+            2.5. L_i = L_{i-1};
 
-            4.4. i = i + 1;
+            2.6. PL_i = PL_{i-1};
 
-            4.5. L_i = L_{i-1};
-
-            4.6. PL_i = PL_{i-1};
-
-    5. Return B_i;
+    3. Return B_i;
 </pre><a href="#section-3.3-9" class="pilcrow">¶</a>
 </div>
 <p id="section-3.3-10">In the above procedure, the function COMPUTE_BOTTLENECK_STRUCTURE
 corresponds to the GradientGraph algorithm introduced in <span>[<a href="#G2-TREP" class="cite xref">G2-TREP</a>]</span>.<a href="#section-3.3-10" class="pilcrow">¶</a></p>
+<p id="section-3.3-11">The termination condition of this procedure is found in line 2.2.1:<a href="#section-3.3-11" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-12">
+<pre>
+    B_i.BW(p) == PM(p) for all path p in PL_i
+</pre><a href="#section-3.3-12" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-13">When the distributed algorithm
+converges to a final solution, the invocation of the procedure
+COMPUTE_BOTTLENECK_SUBSTRUCTURE returns immediately at this
+condition, and the path metric dictionaries
+for all the autonomous systems (PM(A_i) for 1 &lt;= i &lt;= |A|)
+no longer change, provided that the network state does
+not change. Further, upon
+termination, the distributed algorithm ensures that all the path
+metric values for all the autonomous systems are in agreement:<a href="#section-3.3-13" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.3-14">
+<pre>
+    PM(A_i)(p) == PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
+</pre><a href="#section-3.3-14" class="pilcrow">¶</a>
+</div>
+<p id="section-3.3-15">We call this the <em>convergence condition</em>, to denote the fact that
+upon termination, all the path metrics from all the ASs are
+in agreement.<a href="#section-3.3-15" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="example-global-convergence-to-the-correct-bottleneck-substructures">
@@ -1659,7 +1687,7 @@ are as shown in <a href="#bss_as1" class="auto internal xref">Figure 3</a> and <
    |      |  |      |               |      |
    |  p1  &lt;--&gt;  l1  &lt;---------------&gt;  p6  |
    |      |  |      |  +------------+      |
-   +------+  +--^---+  |            +---+--+
+   +------+  +--^---+  |            +------+
                 |      |
                 |      |
              +--v---+  |
@@ -1671,7 +1699,7 @@ are as shown in <a href="#bss_as1" class="auto internal xref">Figure 3</a> and <
                 |      |
              +--v---+  |  +------+
              |      &lt;--+  |      |
-             |  l2  &lt;----&gt;|  p4  +
+             |  l2  &lt;----&gt;|  p4  |
              |      |     |      |
              +--^---+     +------+
                 |
@@ -1694,7 +1722,7 @@ are as shown in <a href="#bss_as1" class="auto internal xref">Figure 3</a> and <
               |      |               |      |
               |  v1  &lt;---------------&gt;  p6  |
               |      |               |      |
-              +------+               +---+--+
+              +------+               +--+---+
                                         |
                                         |
               +------+    +------+   +--v---+  +------+
@@ -1740,9 +1768,10 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
           <div class="alignLeft art-text artwork" id="section-3.4-11.1">
 <pre>
    Iteration 1:
+   ------------
 
-   +====================+
-   | PM(AS1)            |
+   State of the path metric dictionary PM(AS1):
+
    +====================+
    | PM(AS1)(p1) = 8.3  |
    +--------------------+
@@ -1753,7 +1782,9 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
    | PM(AS1)(p4) = 16.6 |
    +--------------------+
    | PM(AS1)(p6) = 8.3  |
-   +--------------------+
+   +====================+
+
+   State of the bottleneck substructure B(AS1):
 
    +------+  +------+               +------+
    |      |  |      |               |      |
@@ -1791,16 +1822,19 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
           <div class="alignLeft art-text artwork" id="section-3.4-12.1">
 <pre>
    Iteration 1:
+   ------------
 
-   +====================+
-   | PM(AS2)            |
+   State of the path metric dictionary PM(AS2):
+
    +====================+
    | PM(AS2)(p4) = 33.3 |
    +--------------------+
    | PM(AS2)(p5) = 33.3 |
    +--------------------+
    | PM(AS2)(p6) = 33.3 |
-   +--------------------+
+   +====================+
+
+   State of the bottleneck substructure B(AS2):
 
    +------+  +------+   +------+
    |      |  |      |   |      |
@@ -1823,16 +1857,19 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
              +------+
 
    Iteration 2:
+   ------------
 
-   +====================+
-   | PM(AS2)            |
+   State of the path metric dictionary PM(AS2):
+
    +====================+
    | PM(AS2)(p4) = 16.6 |
    +--------------------+
    | PM(AS2)(p5) = 75   |
    +--------------------+
    | PM(AS2)(p6) = 8.3  |
-   +--------------------+
+   +====================+
+
+   State of the bottleneck substructure B(AS2):
 
    +------+              +------+
    |      |              |      |
@@ -1858,6 +1895,61 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
 <a href="#name-execution-of-the-distributed" class="selfRef">Execution of the distributed protocol by AS2.</a>
           </figcaption></figure>
 </div>
+<p id="section-3.4-13">Note that at the end of the execution of the distributed
+algorithm, the convergence condition<a href="#section-3.4-13" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-14">
+<pre>
+    PM(A_i)(p) = PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
+</pre><a href="#section-3.4-14" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-15">is satisfied, as shown in <a href="#convergence" class="auto internal xref">Table 2</a>.<a href="#section-3.4-15" class="pilcrow">¶</a></p>
+<span id="name-verification-of-the-converg"></span><div id="convergence">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-verification-of-the-converg" class="selfRef">Verification of the convergence condition.</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-right" rowspan="1" colspan="1">p</th>
+              <th class="text-left" rowspan="1" colspan="1">PM(A1)(p)</th>
+              <th class="text-left" rowspan="1" colspan="1">PM(A2)(p)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p1</td>
+              <td class="text-left" rowspan="1" colspan="1">8.3</td>
+              <td class="text-left" rowspan="1" colspan="1">--</td>
+            </tr>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p2</td>
+              <td class="text-left" rowspan="1" colspan="1">16.6</td>
+              <td class="text-left" rowspan="1" colspan="1">--</td>
+            </tr>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p3</td>
+              <td class="text-left" rowspan="1" colspan="1">8.3</td>
+              <td class="text-left" rowspan="1" colspan="1">--</td>
+            </tr>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p4</td>
+              <td class="text-left" rowspan="1" colspan="1">16.6</td>
+              <td class="text-left" rowspan="1" colspan="1">16.6</td>
+            </tr>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p5</td>
+              <td class="text-left" rowspan="1" colspan="1">--</td>
+              <td class="text-left" rowspan="1" colspan="1">75</td>
+            </tr>
+            <tr>
+              <td class="text-right" rowspan="1" colspan="1">p6</td>
+              <td class="text-left" rowspan="1" colspan="1">8.3</td>
+              <td class="text-left" rowspan="1" colspan="1">8.3</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
 </section>
 </div>
 </section>
@@ -1867,7 +1959,79 @@ PM(AS) and of the bottleneck substructure B(AS) are presented.<a href="#section-
       <h2 id="name-requirements">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirements" class="section-name selfRef">Requirements</a>
       </h2>
-<p id="section-4-1">XXX<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section provides a discussion on the necessary requirements
+to integrate the proposed distributed protocol into the ALTO
+standard. Throughout this discussion, we assume without loss
+of generality that each AS is managed by an ALTO server,
+and that each server only has visibility of the topology,
+links and flow state. We also assume that the TIMER and the
+PATH_METRIC_EXCHANGE events are executed by each ALTO server.
+An alternative architecture could consider executing these
+events in a separated engine, and have the ALTO server
+query this engine to obtain the final bottleneck structures,
+decoupling the distributed protocol from the ALTO standard.
+While this approach might be
+desirable in some cases, we currently omit it from this
+discussion since it is relatively simpler from an integration
+requirements standpoint.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">To implement the proposed distributed protocol using ALTO, two
+broad requirements are necessary:<a href="#section-4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-3.1">Requirement 1: The capability for each ALTO server to
+compute bottleneck substructures of its own AS.<a href="#section-4-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-4-3.2">Requirement 2: The capability for each ALTO server to communicate with
+its neighboring ASs.<a href="#section-4-3.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<div id="requirement-1-computation-of-bottleneck-substructures">
+<section id="section-4.1">
+        <h3 id="name-requirement-1-computation-o">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-requirement-1-computation-o" class="section-name selfRef">Requirement 1: Computation of Bottleneck Substructures</a>
+        </h3>
+<p id="section-4.1-1">The requirements for an ALTO server to compute the bottleneck
+substructure of its associated AS are the same as the
+requirements to compute the bottleneck structure in the case
+the network consists of a single autonomous system.
+These requirements are discussed in the Requirements Section
+of <span>[<a href="#I-D.draft-giraltyellamraju-alto-bsg-requirements" class="cite xref">I-D.draft-giraltyellamraju-alto-bsg-requirements</a>]</span>.
+Refer to this document for further details.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="requirement-2-communication-between-neighboring-ass">
+<section id="section-4.2">
+        <h3 id="name-requirement-2-communication">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-requirement-2-communication" class="section-name selfRef">Requirement 2: Communication Between Neighboring ASs</a>
+        </h3>
+<p id="section-4.2-1">The TIMER event executed by each ALTO server needs to
+periodically transmit a PATH_METRIC_ANNOUNCEMENT message to its
+neighboring ASs. This leads to the following requirement:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-2.1">Requirement 2.1: ALTO servers managing
+neighboring ASs need to be reachable to each other.<a href="#section-4.2-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-2.2">Requirement 2.2: The sharing of algorithmic state
+between ALTO servers requires extending the base ALTO
+protocol to support server-to-server communication
+semantics.<a href="#section-4.2-2.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.2-3">This requirement constitutes a new capability, since the
+current ALTO standard only supports client-to-server
+communication semantics <span>[<a href="#RFC7285" class="cite xref">RFC7285</a>]</span>.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">We note that <span>[<a href="#I-D.draft-zhang-alto-oam-yang" class="cite xref">I-D.draft-zhang-alto-oam-yang</a>]</span>
+discusses mechanisms
+for cross-ALTO server communication with the objective
+to facilitate Operations and Management (OAM) of multi-server
+deployments.
+The distributed protocol proposed in this document
+could be used as a use case to help drive the
+specifications of the inter-server communication protocol
+discussed in <span>[<a href="#I-D.draft-zhang-alto-oam-yang" class="cite xref">I-D.draft-zhang-alto-oam-yang</a>]</span>
+ or in any future ALTO RFCs that
+may focus on sharing of algorithmic state.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="security-considerations">
@@ -1896,7 +2060,7 @@ information, the BSG extension is mainly applicable in
 scenarios where:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-4.1">The properties of the Bottleneck Structure Graph
-do not impose security risks to the ALTO service provider, e.g., by
+do not impose security risks to the ALTO service provider; e.g., by
 not carrying sensitive information.<a href="#section-5-4.1" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="section-5-4.2">The ALTO server and client have
@@ -1935,13 +2099,13 @@ computation and storage on the server side.
 For example, if an ALTO server implementation dynamically computes
 the Bottleneck Structure for each request, the BSG service
 may become an entry point for denial-of-service attacks on the
-availability of an ALTO server.<a href="#section-5-7" class="pilcrow">¶</a></p>
-<p id="section-5-8">To mitigate this risk, an ALTO server may consider using
+availability of an ALTO server. To mitigate this risk,
+an ALTO server may consider using
 optimizations such as precomputation-and-projection mechanisms
 <span>[<a href="#MERCATOR" class="cite xref">MERCATOR</a>]</span> to reduce the overhead for processing each query.
 An ALTO server may also protect itself from malicious clients by
 monitoring the behaviors of clients and stopping serving clients with
-suspicious behaviors (e.g., sending requests at a high frequency).<a href="#section-5-8" class="pilcrow">¶</a></p>
+suspicious behaviors (e.g., sending requests at a high frequency).<a href="#section-5-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1968,13 +2132,9 @@ ALTO Entity Property Type Registry.<a href="#section-6-1" class="pilcrow">¶</a>
         <dd>
 <span class="refAuthor">Ros-Giralt, J.</span>, <span class="refAuthor">Yellamraju, S.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Contreras, L. M.</span>, <span class="refAuthor">Yang, Y. R.</span>, and <span class="refAuthor">K. Gao</span>, <span class="refTitle">"Supporting Bottleneck Structure Graphs in ALTO: Use Cases and Requirements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-giraltyellamraju-alto-bsg-requirements-03</span>, <time datetime="2022-09-23" class="refDate">23 September 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-giraltyellamraju-alto-bsg-requirements-03">https://datatracker.ietf.org/doc/html/draft-giraltyellamraju-alto-bsg-requirements-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-alto-path-vector">[I-D.ietf-alto-path-vector]</dt>
+<dt id="I-D.draft-zhang-alto-oam-yang">[I-D.draft-zhang-alto-oam-yang]</dt>
         <dd>
-<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Lee, Y.</span>, <span class="refAuthor">Randriamasy, S.</span>, <span class="refAuthor">Yang, Y. R.</span>, and <span class="refAuthor">J. Zhang</span>, <span class="refTitle">"An Extension for Application-Layer Traffic Optimization (ALTO): Path Vector"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-alto-path-vector-25</span>, <time datetime="2022-03-20" class="refDate">20 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-alto-path-vector-25">https://datatracker.ietf.org/doc/html/draft-ietf-alto-path-vector-25</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-alto-performance-metrics">[I-D.ietf-alto-performance-metrics]</dt>
-        <dd>
-<span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Yang, Y. R.</span>, <span class="refAuthor">Lee, Y.</span>, <span class="refAuthor">Dhody, D.</span>, <span class="refAuthor">Randriamasy, S.</span>, and <span class="refAuthor">L. M. Contreras</span>, <span class="refTitle">"ALTO Performance Cost Metrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-alto-performance-metrics-28</span>, <time datetime="2022-03-21" class="refDate">21 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-alto-performance-metrics-28">https://datatracker.ietf.org/doc/html/draft-ietf-alto-performance-metrics-28</a>&gt;</span>. </dd>
+<span class="refAuthor">Zhang, J.</span>, <span class="refAuthor">Dhody, D.</span>, <span class="refAuthor">Gao, K.</span>, and <span class="refAuthor">R. Schott</span>, <span class="refTitle">"A Yang Data Model for OAM and Management of ALTO Protocol"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-zhang-alto-oam-yang-02</span>, <time datetime="2022-03-07" class="refDate">7 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-zhang-alto-oam-yang-02">https://datatracker.ietf.org/doc/html/draft-zhang-alto-oam-yang-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1989,16 +2149,8 @@ ALTO Entity Property Type Registry.<a href="#section-6-1" class="pilcrow">¶</a>
 <span class="refAuthor">Alimi, R., Ed.</span>, <span class="refAuthor">Penno, R., Ed.</span>, <span class="refAuthor">Yang, Y., Ed.</span>, <span class="refAuthor">Kiesel, S.</span>, <span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Roome, W.</span>, <span class="refAuthor">Shalunov, S.</span>, and <span class="refAuthor">R. Woundy</span>, <span class="refTitle">"Application-Layer Traffic Optimization (ALTO) Protocol"</span>, <span class="seriesInfo">RFC 7285</span>, <span class="seriesInfo">DOI 10.17487/RFC7285</span>, <time datetime="2014-09" class="refDate">September 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7285">https://www.rfc-editor.org/rfc/rfc7285</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-        <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8402">[RFC8402]</dt>
-        <dd>
-<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Previdi, S., Ed.</span>, <span class="refAuthor">Ginsberg, L.</span>, <span class="refAuthor">Decraene, B.</span>, <span class="refAuthor">Litkowski, S.</span>, and <span class="refAuthor">R. Shakir</span>, <span class="refTitle">"Segment Routing Architecture"</span>, <span class="seriesInfo">RFC 8402</span>, <span class="seriesInfo">DOI 10.17487/RFC8402</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8402">https://www.rfc-editor.org/rfc/rfc8402</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8896">[RFC8896]</dt>
       <dd>
-<span class="refAuthor">Randriamasy, S.</span>, <span class="refAuthor">Yang, R.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Deng, L.</span>, and <span class="refAuthor">N. Schwan</span>, <span class="refTitle">"Application-Layer Traffic Optimization (ALTO) Cost Calendar"</span>, <span class="seriesInfo">RFC 8896</span>, <span class="seriesInfo">DOI 10.17487/RFC8896</span>, <time datetime="2020-11" class="refDate">November 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8896">https://www.rfc-editor.org/rfc/rfc8896</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2007,30 +2159,6 @@ ALTO Entity Property Type Registry.<a href="#section-6-1" class="pilcrow">¶</a>
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="B4-SIGCOMM">[B4-SIGCOMM]</dt>
-        <dd>
-<span class="refAuthor">Jain et al, S.</span>, <span class="refTitle">"B4: Experience with a Globally-Deployed Software Defined WAN"</span>, <span class="seriesInfo">ACM SIGCOMM </span>, <time datetime="2013" class="refDate">2013</time>. </dd>
-<dd class="break"></dd>
-<dt id="BE-ONL">[BE-ONL]</dt>
-        <dd>
-<span class="refTitle">"Bandwidth Estimation on OpenNetLab"</span>, <span class="seriesInfo">IETF Plenary 112, IETF ALTO WG </span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/meeting/112/materials/slides-112-alto-bandwidth-estimation-service-00">https://datatracker.ietf.org/meeting/112/materials/slides-112-alto-bandwidth-estimation-service-00</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="BE-SIGCOMM">[BE-SIGCOMM]</dt>
-        <dd>
-<span class="refAuthor">Kumar et al, A.</span>, <span class="refTitle">"BwE: Flexible, Hierarchical Bandwidth Allocation for WAN Distributed Computing"</span>, <span class="seriesInfo">ACM SIGCOMM </span>, <time datetime="2015" class="refDate">2015</time>. </dd>
-<dd class="break"></dd>
-<dt id="FLEXFLOW-STFORD">[FLEXFLOW-STFORD]</dt>
-        <dd>
-<span class="refAuthor">Jia et al, Z.</span>, <span class="refTitle">"Beyond Data And Model Parallelism For Deep Neural Networks"</span>, <span>n.d.</span>, <span>&lt;<a href="https://arxiv.org/pdf/1807.05358.pdf%5B">https://arxiv.org/pdf/1807.05358.pdf[</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="FLOWDIR">[FLOWDIR]</dt>
-        <dd>
-<span class="refAuthor">Pujol, E.</span>, <span class="refAuthor">Poese, I.</span>, <span class="refAuthor">Zerwas, J.</span>, <span class="refAuthor">Smaragdakis, G.</span>, and <span class="refAuthor">A. Feldmann</span>, <span class="refTitle">"Steering Hyper-Giants' Traffic at Scale"</span>, <span class="seriesInfo">ACM CoNEXT </span>, <time datetime="2019" class="refDate">2019</time>. </dd>
-<dd class="break"></dd>
-<dt id="G2-SC">[G2-SC]</dt>
-        <dd>
-<span class="refAuthor">Amsel, N.</span>, <span class="refAuthor">Ros-Giralt, J.</span>, <span class="refAuthor">Yellamraju, S.</span>, <span class="refAuthor">von Hoffe, B.</span>, and <span class="refAuthor">R. Lethin</span>, <span class="refTitle">"Computing Bottleneck Structures at Scale for High-Precision Network Performance Analysis"</span>, <span class="seriesInfo">IEEE International Workshop on Innovating the Network for Data Intensive Science (INDIS), Supercomputing </span>, <time datetime="2020" class="refDate">2020</time>. </dd>
-<dd class="break"></dd>
 <dt id="G2-SIGCOMM">[G2-SIGCOMM]</dt>
         <dd>
 <span class="refAuthor">Ros-Giralt, J.</span>, <span class="refAuthor">Amsel, N.</span>, <span class="refAuthor">Yellamraju, S.</span>, <span class="refAuthor">Ezick, J.</span>, <span class="refAuthor">Lethin, R.</span>, <span class="refAuthor">Jiang, Y.</span>, <span class="refAuthor">Feng, A.</span>, <span class="refAuthor">Tassiulas, L.</span>, <span class="refAuthor">Wu, Z.</span>, and <span class="refAuthor">K. Bergman</span>, <span class="refTitle">"Designing data center networks using bottleneck structures"</span>, <span class="seriesInfo">ACM SIGCOMM </span>, <time datetime="2021" class="refDate">2021</time>. </dd>
@@ -2043,45 +2171,13 @@ ALTO Entity Property Type Registry.<a href="#section-6-1" class="pilcrow">¶</a>
         <dd>
 <span class="refAuthor">Ros-Giralt, J.</span>, <span class="refAuthor">Amsel, N.</span>, <span class="refAuthor">Yellamraju, S.</span>, <span class="refAuthor">Ezick, J.</span>, <span class="refAuthor">Lethin, R.</span>, <span class="refAuthor">Jiang, Y.</span>, <span class="refAuthor">Feng, A.</span>, <span class="refAuthor">Tassiulas, L.</span>, <span class="refAuthor">Wu, Z.</span>, and <span class="refAuthor">K. Bergman</span>, <span class="refTitle">"A Quantitative Theory of Bottleneck Structures for Data Networks"</span>, <span class="seriesInfo">Qualcomm Technologies Inc., Technical Report </span>, <time datetime="2021" class="refDate">2021</time>. </dd>
 <dd class="break"></dd>
-<dt id="GALLAGER">[GALLAGER]</dt>
-        <dd>
-<span class="refAuthor">Gallager, R.</span> and <span class="refAuthor">D. Bertsekas</span>, <span class="refTitle">"Data Networks"</span>, <time datetime="1992" class="refDate">1992</time>. </dd>
-<dd class="break"></dd>
-<dt id="JSP-INFOCOM">[JSP-INFOCOM]</dt>
-        <dd>
-<span class="refAuthor">Poularakis et al, D.</span>, <span class="refTitle">"Joint Service Placement and Request Routing in Multi-cell Mobile Edge Computing Networks"</span>, <span>n.d.</span>. </dd>
-<dd class="break"></dd>
-<dt id="LORENZ">[LORENZ]</dt>
-        <dd>
-<span class="refAuthor">Lorenz, E.</span>, <span class="refTitle">"Does the flap of a butterfly's wings in Brazil set off a tornado in Texas?"</span>, <span class="seriesInfo">American Association for the Advancement of Science, 139th Meeting </span>, <time datetime="1972" class="refDate">1972</time>. </dd>
-<dd class="break"></dd>
 <dt id="MERCATOR">[MERCATOR]</dt>
         <dd>
 <span class="refAuthor">Xiang, Q.</span>, <span class="refAuthor">Zhang, J.</span>, <span class="refAuthor">Wang, X.</span>, <span class="refAuthor">Guok, C.</span>, <span class="refAuthor">Le, F.</span>, <span class="refAuthor">MacAuley, J.</span>, <span class="refAuthor">Newman, H.</span>, and <span class="refAuthor">Y. Yang</span>, <span class="refTitle">"Toward Fine- Grained, Privacy-Preserving, Efficient Multi-Domain Network Resource Discovery"</span>, <span class="seriesInfo">IEEE/ACM IEEE/ACM IEEE Journal on Selected Areas of Communication 37(8): 1924-1940</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://doi.org/10.1109/JSAC.2019.2927073">https://doi.org/10.1109/JSAC.2019.2927073</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="MMSYS">[MMSYS]</dt>
-        <dd>
-<span class="refTitle">"Bandwidth Estimation for Real-Time Communications"</span>, <time datetime="2021" class="refDate">2021</time>, <span>&lt;<a href="https://2021.acmmmsys.org/rtc_challenge.php">https://2021.acmmmsys.org/rtc_challenge.php</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="NOVA">[NOVA]</dt>
-        <dd>
-<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Xiang, Q.</span>, <span class="refAuthor">Wang, X.</span>, <span class="refAuthor">Yang, Y.</span>, and <span class="refAuthor">J. Bi</span>, <span class="refTitle">"An objective-driven on-demand network abstraction for adaptive applications"</span>, <span class="seriesInfo">IEEE/ACM IEEE/ACM Transactions on Networking (TON) Vol 27, no. 2 (2019): 805-818.</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://doi.org/10.1109/IWQoS.2017.7969117">https://doi.org/10.1109/IWQoS.2017.7969117</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="PETERSON">[PETERSON]</dt>
-        <dd>
-<span class="refAuthor">Peterson, L.</span> and <span class="refAuthor">O. Sunay</span>, <span class="refTitle">"5G Mobile Networks: A Systems Approach"</span>, <span class="seriesInfo">Open Networking Foundation </span>, <time datetime="2020" class="refDate">2020</time>. </dd>
-<dd class="break"></dd>
-<dt id="SH-SIGCOMM">[SH-SIGCOMM]</dt>
-        <dd>
-<span class="refAuthor">Singh et al, R.</span>, <span class="refTitle">"Cost-effective capacity provisioning in wide area networks with Shoofly"</span>, <span class="seriesInfo">ACM SIGCOMM </span>, <time datetime="2021" class="refDate">2021</time>. </dd>
-<dd class="break"></dd>
-<dt id="SINGULARITY-MSFT">[SINGULARITY-MSFT]</dt>
-        <dd>
-<span class="refAuthor">Shukla et al, D.</span>, <span class="refTitle">"Singularity: Planet-Scale, Preemptive and Elastic Scheduling of AI Workloads"</span>, <span>n.d.</span>, <span>&lt;<a href="https://arxiv.org/pdf/2202.07848.pdf">https://arxiv.org/pdf/2202.07848.pdf</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="TOPOOPT-MIT">[TOPOOPT-MIT]</dt>
       <dd>
-<span class="refAuthor">Wang et al, W.</span>, <span class="refTitle">"TOPOOPT: Optimizing the Network Topology for Distributed DNN Training"</span>, <span>n.d.</span>, <span>&lt;<a href="https://arxiv.org/pdf/2202.00433.pdf">https://arxiv.org/pdf/2202.00433.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Gao, K.</span>, <span class="refAuthor">Xiang, Q.</span>, <span class="refAuthor">Wang, X.</span>, <span class="refAuthor">Yang, Y.</span>, and <span class="refAuthor">J. Bi</span>, <span class="refTitle">"An objective-driven on-demand network abstraction for adaptive applications"</span>, <span class="seriesInfo">IEEE/ACM IEEE/ACM Transactions on Networking (TON) Vol 27, no. 2 (2019): 805-818.</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://doi.org/10.1109/IWQoS.2017.7969117">https://doi.org/10.1109/IWQoS.2017.7969117</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
