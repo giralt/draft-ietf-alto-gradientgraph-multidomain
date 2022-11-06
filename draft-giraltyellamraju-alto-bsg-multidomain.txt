@@ -5,7 +5,7 @@
 Application-Layer Traffic Optimization                     J. Ros-Giralt
 Internet-Draft                                     Qualcomm Europe, Inc.
 Intended status: Informational                             S. Yellamraju
-Expires: 27 April 2023                       Qualcomm Technologies, Inc.
+Expires: 10 May 2023                         Qualcomm Technologies, Inc.
                                                                    Q. Wu
                                                                   Huawei
                                                          L. M. Contreras
@@ -14,7 +14,7 @@ Expires: 27 April 2023                       Qualcomm Technologies, Inc.
                                                          Yale University
                                                                   K. Gao
                                                       Sichuan University
-                                                         24 October 2022
+                                                         6 November 2022
 
 
  Bottleneck Structure Graphs in Multidomain Networks: Introduction and
@@ -71,7 +71,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 April 2023.
+   This Internet-Draft will expire on 10 May 2023.
 
 Copyright Notice
 
@@ -144,10 +144,11 @@ Table of Contents
    this information alone is enough to ensure independent convergence by
    each AS to the correct bottleneck structure.  This cooperative
    solution presents similar properties as those found in well-known
-   IETF protocols such as BGP, including the properties of scalability
-   (since metrics only need to be shared on a per-path rather than per-
-   flow basis, and only between neighboring ASs) and privacy (since no
-   sensitive flow or topology information needs to be shared).
+   IETF protocols such as BGP [RFC4271], including the properties of
+   scalability (since metrics only need to be shared on a per-path
+   rather than per-flow basis, and only between neighboring ASs) and
+   privacy (since no sensitive flow or topology information needs to be
+   shared).
 
    We also present initial discussions on the necessary requirements to
    integrate the proposed capability into the ALTO standard.
@@ -265,62 +266,64 @@ Table of Contents
    that are used in the description of the distributed protocol in the
    next section:
 
-   +=============+=====================================================+
-   |     Notation|Description                                          |
-   +=============+=====================================================+
-   |            A|The set of autonomous systems (ASs).                 |
-   +-------------+-----------------------------------------------------+
-   |          A_i|An AS in A, for i = 1, ..., |A|.                     |
-   +-------------+-----------------------------------------------------+
-   |     P(A_i) =|The set of active paths found in A_i.  These are     |
-   |   {p_1, ...,|paths for which there exist 0traffic flowing through |
-   |  p_|P(A_i)|}|them.                                                |
-   +-------------+-----------------------------------------------------+
-   |     L(A_i) =|The set of active links found in A_i.  These are     |
-   |   {l_1, ...,|links for which there exists traffic flowing through |
-   |  l_|L(A_i)|}|them.                                                |
-   +-------------+-----------------------------------------------------+
-   |            B|The global bottleneck structure graph.  The form of  |
-   |             |bottleneck structure used by the distributed         |
-   |             |algorithm introduced in this document is the Path    |
-   |             |Gradient Graph                                       |
-   |             |[I-D.draft-giraltyellamraju-alto-bsg-requirements].  |
-   +-------------+-----------------------------------------------------+
-   |      B.BW(p)|The bandwidth available to path p according to the   |
-   |             |global bottleneck structure.  This is always the     |
-   |             |globally correct available bandwidth for path p.     |
-   +-------------+-----------------------------------------------------+
-   |       B(A_i)|The bottleneck substructure of A_i, corresponding to |
-   |             |the subgraph of B that includes (1) the vertices     |
-   |             |corresponding to the paths in P(A_i), (2) the        |
-   |             |vertices corresponding to the links in L(A_i) and (3)|
-   |             |all the edges in B that connect them.  If a path p in|
-   |             |P(A_i) is bottlenecked at a link not in L(A_i), then |
-   |             |B(P, L) includes a virtual link v with capacity equal|
-   |             |to B.BW(p) and a directed edge from v to p.          |
-   +-------------+-----------------------------------------------------+
-   | B(A_i).BW(p)|The bandwidth available to path p according to the   |
-   |             |bottleneck substructure of A_i.  This value is equal |
-   |             |to B.BW(p) when the distributed algorithm terminates.|
-   +-------------+-----------------------------------------------------+
-   |      PL(A_i)|A dictionary mapping every path in P(A_i) with the   |
-   |             |subset of links in L(A_i) that it traverses.  Note   |
-   |             |that a path p can traverse one or more links not in  |
-   |             |L(A_i).  This reflects the notion of partial         |
-   |             |information inherent to multi-domain networking      |
-   |             |environments.  That is, A_i may not know all the     |
-   |             |links traversed by its active paths; in particular,  |
-   |             |it only knows the subset of links that are in A_i.   |
-   +-------------+-----------------------------------------------------+
-   |       C(A_i)|A dictionary mapping each link in A_i with its       |
-   |             |capacity (in bps).                                   |
-   +-------------+-----------------------------------------------------+
-   |       N(A_i)|The set of ASs that are neighbors of A_i.            |
-   +-------------+-----------------------------------------------------+
-   |   PM(A_i)(p)|The current bandwidth available to path p as computed|
-   |             |by A_i.  This is also known as the path metric of p  |
-   |             |according to A_i.                                    |
-   +-------------+-----------------------------------------------------+
+   +============+======================================================+
+   |    Notation| Description                                          |
+   +============+======================================================+
+   |           A| The set of autonomous systems (ASs).                 |
+   +------------+------------------------------------------------------+
+   |         A_i| An AS in A, for i = 1, ..., |A|.                     |
+   +------------+------------------------------------------------------+
+   |    P(A_i) =| The set of active paths found in A_i.  These are     |
+   |  {p_1, ...,| paths for which there exist 0traffic flowing         |
+   | p_|P(A_i)|}| through them.                                        |
+   +------------+------------------------------------------------------+
+   |    L(A_i) =| The set of active links found in A_i.  These are     |
+   |  {l_1, ...,| links for which there exists traffic flowing         |
+   | l_|L(A_i)|}| through them.                                        |
+   +------------+------------------------------------------------------+
+   |           B| The global bottleneck structure graph.  The form of  |
+   |            | bottleneck structure used by the distributed         |
+   |            | algorithm introduced in this document is the Path    |
+   |            | Gradient Graph                                       |
+   |            | [I-D.draft-giraltyellamraju-alto-bsg-requirements].  |
+   +------------+------------------------------------------------------+
+   |     B.BW(p)| The bandwidth available to path p according to the   |
+   |            | global bottleneck structure.  This is always the     |
+   |            | globally correct available bandwidth for path p.     |
+   +------------+------------------------------------------------------+
+   |      B(A_i)| The bottleneck substructure of A_i, corresponding    |
+   |            | to the subgraph of B that includes (1) the vertices  |
+   |            | corresponding to the paths in P(A_i), (2) the        |
+   |            | vertices corresponding to the links in L(A_i) and    |
+   |            | (3) all the edges in B that connect them.  If a      |
+   |            | path p in P(A_i) is bottlenecked at a link not in    |
+   |            | L(A_i), then B(P, L) includes a virtual link v with  |
+   |            | capacity equal to B.BW(p) and a directed edge from   |
+   |            | v to p.                                              |
+   +------------+------------------------------------------------------+
+   |B(A_i).BW(p)| The bandwidth available to path p according to the   |
+   |            | bottleneck substructure of A_i.  This value is       |
+   |            | equal to B.BW(p) when the distributed algorithm      |
+   |            | terminates.                                          |
+   +------------+------------------------------------------------------+
+   |     PL(A_i)| A dictionary mapping every path in P(A_i) with the   |
+   |            | subset of links in L(A_i) that it traverses.  Note   |
+   |            | that a path p can traverse one or more links not in  |
+   |            | L(A_i).  This reflects the notion of partial         |
+   |            | information inherent to multi-domain networking      |
+   |            | environments.  That is, A_i may not know all the     |
+   |            | links traversed by its active paths; in particular,  |
+   |            | it only knows the subset of links that are in A_i.   |
+   +------------+------------------------------------------------------+
+   |      C(A_i)| A dictionary mapping each link in A_i with its       |
+   |            | capacity (in bps).                                   |
+   +------------+------------------------------------------------------+
+   |      N(A_i)| The set of ASs that are neighbors of A_i.            |
+   +------------+------------------------------------------------------+
+   |  PM(A_i)(p)| The current bandwidth available to path p as         |
+   |            | computed by A_i.  This is also known as the path     |
+   |            | metric of p according to A_i.                        |
+   +------------+------------------------------------------------------+
 
     Table 1: Conventions and definitions used in the description of the
                            distributed protocol.
@@ -395,7 +398,7 @@ Table of Contents
    In the above procedure, the function COMPUTE_BOTTLENECK_STRUCTURE
    corresponds to the GradientGraph algorithm introduced in [G2-TREP].
 
-   The termination condition of this procedure is found in line 2.2.1:
+   The termination condition of this procedure is found in line 2.2:
 
        B_i.BW(p) == PM(p) for all path p in PL_i
 
@@ -410,8 +413,8 @@ Table of Contents
     PM(A_i)(p) == PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
 
    We call this the _convergence condition_, to denote the fact that
-   upon termination, all the path metrics from all the ASs are in
-   agreement.
+   upon termination, all the path metrics from all the ASs reflect the
+   correct state of the global bottleneck structure.
 
 3.4.  Example: Global Convergence to the Correct Bottleneck
       Substructures
