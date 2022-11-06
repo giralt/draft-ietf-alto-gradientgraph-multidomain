@@ -274,8 +274,8 @@ Table of Contents
    |         A_i| An AS in A, for i = 1, ..., |A|.                     |
    +------------+------------------------------------------------------+
    |    P(A_i) =| The set of active paths found in A_i.  These are     |
-   |  {p_1, ...,| paths for which there exist 0traffic flowing         |
-   | p_|P(A_i)|}| through them.                                        |
+   |  {p_1, ...,| paths for which there exist traffic flowing through  |
+   | p_|P(A_i)|}| them.                                                |
    +------------+------------------------------------------------------+
    |    L(A_i) =| The set of active links found in A_i.  These are     |
    |  {l_1, ...,| links for which there exists traffic flowing         |
