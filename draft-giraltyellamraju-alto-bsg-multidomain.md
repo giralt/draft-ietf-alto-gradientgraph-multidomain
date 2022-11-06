@@ -240,7 +240,7 @@ introduced in this document, this information alone is enough to ensure
 independent convergence by each AS to the correct bottleneck
 structure. This cooperative solution presents similar properties
 as those found in well-known IETF protocols
-such as BGP, including the properties of scalability (since metrics
+such as BGP {{RFC4271}}, including the properties of scalability (since metrics
 only need to be shared on a per-path rather than per-flow basis, and
 only between neighboring ASs) and privacy
 (since no sensitive flow or topology information needs to be shared).
@@ -441,7 +441,7 @@ of PATH_METRIC_ANNOUNCEMENT messages:
 In the above procedure, the function COMPUTE_BOTTLENECK_STRUCTURE
 corresponds to the GradientGraph algorithm introduced in {{G2-TREP}}.
 
-The termination condition of this procedure is found in line 2.2.1:
+The termination condition of this procedure is found in line 2.2:
 
 	B_i.BW(p) == PM(p) for all path p in PL_i
 
@@ -458,8 +458,8 @@ metric values for all the autonomous systems are in agreement:
 	PM(A_i)(p) == PM(A_j)(p) for all p in A_i, p in A_j, A_i in A and A_j in A
 
 We call this the *convergence condition*, to denote the fact that
-upon termination, all the path metrics from all the ASs are
-in agreement.
+upon termination, all the path metrics from all the ASs reflect
+the correct state of the global bottleneck structure.
 
 ## Example: Global Convergence to the Correct Bottleneck Substructures
 
