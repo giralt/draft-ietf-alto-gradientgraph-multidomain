@@ -359,7 +359,7 @@ in the description of the distributed protocol in the next section:
 |-----------:|:----------------------|
 | A | The set of autonomous systems (ASs). |
 | A_i | An AS in A, for i = 1, ..., \|A\|. |
-| P(A_i) = {p_1, ..., p_\|P(A_i)\|} | The set of active paths found in A_i. These are paths for which there exist 0traffic flowing through them. |
+| P(A_i) = {p_1, ..., p_\|P(A_i)\|} | The set of active paths found in A_i. These are paths for which there exist traffic flowing through them. |
 | L(A_i) = {l_1, ..., l_\|L(A_i)\|} | The set of active links found in A_i. These are links for which there exists traffic flowing through them. |
 | B          | The global bottleneck structure graph. The form of bottleneck structure used by the distributed algorithm introduced in this document is the Path Gradient Graph {{I-D.draft-giraltyellamraju-alto-bsg-requirements}}. |
 | B.BW(p) | The bandwidth available to path p according to the global bottleneck structure. This is always the globally correct available bandwidth for path p.|
