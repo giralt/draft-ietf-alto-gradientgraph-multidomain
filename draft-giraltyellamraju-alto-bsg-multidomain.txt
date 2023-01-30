@@ -5,7 +5,7 @@
 Application-Layer Traffic Optimization                     J. Ros-Giralt
 Internet-Draft                                     Qualcomm Europe, Inc.
 Intended status: Informational                             S. Yellamraju
-Expires: 10 May 2023                         Qualcomm Technologies, Inc.
+Expires: 3 August 2023                       Qualcomm Technologies, Inc.
                                                                    Q. Wu
                                                                   Huawei
                                                          L. M. Contreras
@@ -14,7 +14,7 @@ Expires: 10 May 2023                         Qualcomm Technologies, Inc.
                                                          Yale University
                                                                   K. Gao
                                                       Sichuan University
-                                                         6 November 2022
+                                                         30 January 2023
 
 
  Bottleneck Structure Graphs in Multidomain Networks: Introduction and
@@ -71,11 +71,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2023.
+   This Internet-Draft will expire on 3 August 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -146,9 +146,9 @@ Table of Contents
    solution presents similar properties as those found in well-known
    IETF protocols such as BGP [RFC4271], including the properties of
    scalability (since metrics only need to be shared on a per-path
-   rather than per-flow basis, and only between neighboring ASs) and
+   rather than per-flow basis, and only between neighboring ASs),
    privacy (since no sensitive flow or topology information needs to be
-   shared).
+   shared), and global convergence.
 
    We also present initial discussions on the necessary requirements to
    integrate the proposed capability into the ALTO standard.
@@ -330,7 +330,7 @@ Table of Contents
 
 3.3.  Description of The Distributed Protocol
 
-   The algorithm run by each autonomous system AS_i, 1 <= i <= |A|,
+   The algorithm run by each autonomous system A_i, 1 <= i <= |A|,
    consists of two independently executed events as follows:
 
    *Event: TIMER*
@@ -343,11 +343,11 @@ Table of Contents
 
         3. For all A_j in N(A_i):
 
-            3.1 Send to A_j a PATH_METRIC_ANNOUNCEMENT message including (AS_i, PM(A_i));
+            3.1 Send to A_j a PATH_METRIC_ANNOUNCEMENT message including (A_i, PM(A_i));
 
    *Event: PATH_METRIC_EXCHANGE*
 
-    - Upon receiving a PATH_METRIC_ANNOUNCEMENT from AS_j carrying (AS_j, PM(A_j)):
+    - Upon receiving a PATH_METRIC_ANNOUNCEMENT from A_j carrying (A_j, PM(A_j)):
 
         1. PM(A_i)(p) = min{PM(A_i)(p), PM(A_j)(p)}, for all p in P(A_i) and p in P(A_j);
 
