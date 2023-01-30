@@ -391,7 +391,7 @@ consists of two independently executed events as follows:
 
 **Event: PATH_METRIC_EXCHANGE**
 
-	- Upon receiving a PATH_METRIC_ANNOUNCEMENT from AS_j carrying (AS_j, PM(A_j)):
+	- Upon receiving a PATH_METRIC_ANNOUNCEMENT from A_j carrying (A_j, PM(A_j)):
 
 	    1. PM(A_i)(p) = min{PM(A_i)(p), PM(A_j)(p)}, for all p in P(A_i) and p in P(A_j);
 
