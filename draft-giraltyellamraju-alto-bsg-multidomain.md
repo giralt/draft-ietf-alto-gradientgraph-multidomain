@@ -242,8 +242,9 @@ structure. This cooperative solution presents similar properties
 as those found in well-known IETF protocols
 such as BGP {{RFC4271}}, including the properties of scalability (since metrics
 only need to be shared on a per-path rather than per-flow basis, and
-only between neighboring ASs) and privacy
-(since no sensitive flow or topology information needs to be shared).
+only between neighboring ASs), privacy
+(since no sensitive flow or topology information needs to be shared),
+and global convergence.
 
 We also present initial discussions on the necessary
 requirements to integrate the proposed capability into the
@@ -373,7 +374,7 @@ in the description of the distributed protocol in the next section:
 
 ## Description of The Distributed Protocol
 
-The algorithm run by each autonomous system AS_i, 1 <= i <= |A|,
+The algorithm run by each autonomous system A_i, 1 <= i <= |A|,
 consists of two independently executed events as follows:
 
 **Event: TIMER**
@@ -386,7 +387,7 @@ consists of two independently executed events as follows:
 
 	    3. For all A_j in N(A_i):
 
-	        3.1 Send to A_j a PATH_METRIC_ANNOUNCEMENT message including (AS_i, PM(A_i));
+	        3.1 Send to A_j a PATH_METRIC_ANNOUNCEMENT message including (A_i, PM(A_i));
 
 **Event: PATH_METRIC_EXCHANGE**
 
