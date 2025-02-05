@@ -5,7 +5,7 @@
 Application-Layer Traffic Optimization                     J. Ros-Giralt
 Internet-Draft                                     Qualcomm Europe, Inc.
 Intended status: Informational                             S. Yellamraju
-Expires: 3 August 2023                       Qualcomm Technologies, Inc.
+Expires: 9 August 2025                       Qualcomm Technologies, Inc.
                                                                    Q. Wu
                                                                   Huawei
                                                          L. M. Contreras
@@ -14,7 +14,7 @@ Expires: 3 August 2023                       Qualcomm Technologies, Inc.
                                                          Yale University
                                                                   K. Gao
                                                       Sichuan University
-                                                         30 January 2023
+                                                         5 February 2025
 
 
  Bottleneck Structure Graphs in Multidomain Networks: Introduction and
@@ -71,11 +71,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2023.
+   This Internet-Draft will expire on 9 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -170,7 +170,7 @@ Table of Contents
    different operator that is responsible for (1) maintaining its own
    (and only its own) domain and (2) ensuring interoperability with the
    other domains.  The quintessential example of multi-domain networks
-   is the Internet, designed as a "network of interconnected networks",
+   is the Internet, designed as a “network of interconnected networks”,
    commonly known as _autonomous systems_ (ASs).
 
    In multi-domain networking environments, the operator in each domain
